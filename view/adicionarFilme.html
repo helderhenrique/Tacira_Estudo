@@ -1,0 +1,27 @@
+<div class="jumbotron">
+    <form name="filmeForm">
+        <input class="form-control" type="text" ng-model="filme.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="5" />
+        <input class="form-control" type="text" ng-model="filme.ano" name="ano" placeholder="Ano de lançamento" ng-required="true" ui-date/>
+        <select class="form-control" ng-required="true" ng-model="filme.genero" ng-options="genero.nome for genero in generos | orderBy:'nome'">
+            <option value="">Selecione um genero</option>
+        </select>
+    </form>
+
+    <div ng-show="filmeForm.nome.$dirty" ng-messages="filmeForm.nome.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo nome!
+        </div>
+        <div ng-message="minlength" class="alert alert-danger">
+            O campo nome deve ter no maximo 10 caracteres.
+        </div>
+    </div>
+
+    <div ng-show="filmeForm.ano.$error.required && filmeForm.ano.$dirty" class="alert alert-danger">
+        Por favor, preencha o campo ano!
+    </div>
+    <div ng-show="filmeForm.ano.$error.pattern" class="alert alert-danger">
+        O campo ano deve ter o formato XX/XX/XXXX.
+    </div>
+    <button class="btn btn-primary btn-block" ng-click="adicionarFilme(filme)" ng-disabled="filmeForm.$invalid">Adicionar Filme</button>
+
+</div>

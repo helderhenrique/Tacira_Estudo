@@ -1,0 +1,28 @@
+<div class="jumbotron">
+
+    <h3>{{app}}</h3>
+    <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que você está buscando?" />
+    <table ng-show="filmes.length > 0" class="table table-striped">
+        <tr>
+            <th></th>
+            <th><a href="" ng-click="ordenarPor('nome')">Nome</a></th>
+            <th><a href="" ng-click="ordenarPor('ano')">Lançamento<a/></th>
+            <th>Genero</th>
+			</tr>
+
+			<tr ng-class="{'selecionado negrito': filme.selecionado}" ng-repeat="filme in filmes | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
+				<td><input type="checkbox" ng-model="filme.selecionado"/></td>
+				<td>{{filme.nome}}</td>
+				<td>{{filme.ano | date: 'dd/MM/yyyy'}}</td>
+				<td>{{filme.genero.nome}}</td>
+			</tr>
+		</table>
+
+    <tr>
+        <td>
+            <a class="btn btn-primary btn-block" href="#/adicionarFilme">Adicionar Filme</a>
+                <button class="btn btn-danger btn-block" ng-click="apagarFilmes(filmes)" ng-if="isFilmeSelecionado(filmes)">Apagar Filme</button>
+                </td>
+        </tr>
+
+</div>
